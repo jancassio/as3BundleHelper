@@ -64,7 +64,7 @@
 	queuedVars = [[NSMutableArray alloc] init];
 	
 	//Custom table cell for displaying checkboxes
-	[[variablesView tableColumnWithIdentifier: @"valueColumn"] setDataCell: [[[DebuggerValueCell alloc] init] autorelease]];
+	[[variablesView tableColumnWithIdentifier: @"valueColumn"] setDataCell: [[DebuggerValueCell alloc] init]];
 	
 	//Html file (code view)
 	NSString * htmlPath = [[NSBundle mainBundle] pathForResource: @"code" ofType: @"html" inDirectory: @"codeView"];
@@ -142,7 +142,6 @@
 				[actionScriptFiles addObject:file];
 			}
 		}
-		[thisPath release];
 	}
 	
 	return actionScriptFiles;
@@ -289,7 +288,7 @@
 
 - (void) parseVarsForString: (NSString *)inputString atNode: (Variable *) fromVar
 {
-	NSMutableArray * result = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray * result = [[NSMutableArray alloc] init];
 	NSArray * lines = [inputString componentsSeparatedByString:@"\n"];
 	NSString * line;
 	
@@ -303,7 +302,7 @@
 		if([line isMatchedByRegex: FDB_GET_VARIABLE_VALUE]){
 			
 			//Create variable
-			Variable * v = [[[Variable alloc] init] autorelease];
+			Variable * v = [[Variable alloc] init];
 			//Set delegate
 			v.delegate = self;
 
@@ -434,7 +433,7 @@
 	} else if([message rangeOfString:FDB_INSERT_BREAKPOINTS].location != NSNotFound)
 	{
 		//Time to set Breakpoints
-		NSLog(@"Setting %d breakpoints", [breakpoints count]);
+		NSLog(@"Setting %lu breakpoints", (unsigned long)[breakpoints count]);
 		//Adding breakpoints to the list
 		for(int i=0; i < [breakpoints count]; i++){
 			NSLog(@"%@", [breakpoints objectAtIndex:i]);
@@ -492,7 +491,7 @@
 	/*
 	 Got variable definitions
 	 */
-	} else if ([message isMatchedByRegex: [NSString stringWithFormat: FDB_VARIABLE_LIST, currentInspectedVar]]) {
+	} else if ([message isMatchedByRegex: FDB_VARIABLE_LIST]) {
 		
 		Variable *v = nil;
 		
@@ -528,7 +527,6 @@
 
 - (void)stopTask {
 	[fdbCommunicator stop];
-	[fdbCommunicator release];
 }
 
 #pragma mark Helpers
@@ -540,7 +538,7 @@
 
 -(void) alert: (NSString *)message
 {
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle:@"OK"];
 	[alert setMessageText:message];
 	[alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:nil contextInfo:nil];

@@ -39,7 +39,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  
+#define restrict
 #ifndef _REGEXKIT_RKREGEX_H_
 #define _REGEXKIT_RKREGEX_H_ 1
 

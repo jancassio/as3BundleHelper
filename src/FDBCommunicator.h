@@ -23,7 +23,7 @@
 
 	TaskWrapper *			fdbTask;					//Task wich we talk to
 	NSMutableArray *		commandQueue;				//Commands waiting in line
-	id	<FDBCommunicatorClient>delegate;				//Delegate
+	id	<FDBCommunicatorClient>__unsafe_unretained delegate;				//Delegate
 	
 	NSString *				truncatedOutput;			//Output so far received from fdb
 	FDBCommand *			currentCommand;				//Command we're waiting to get the response
@@ -42,6 +42,6 @@
 - (void)processStarted;									//Called when the process has started
 - (void)processFinished;								//Called when the process finished
 
-@property (assign) id <FDBCommunicatorClient>delegate;
+@property (unsafe_unretained) id <FDBCommunicatorClient>delegate;
 
 @end

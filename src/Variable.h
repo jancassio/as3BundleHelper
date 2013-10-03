@@ -29,9 +29,9 @@
 	NSString * fullName;
 	
 	//Delegate to update children
-	id delegate;
+	id __unsafe_unretained delegate;
 	
-	NSMutableArray * child;
+	NSMutableArray * __unsafe_unretained child;
 
 }
 
@@ -40,8 +40,8 @@
 - (BOOL) leaf;
 - (NSString *) printCommand;
 
-@property (assign) id<VariableDelegate> delegate;
-@property (assign) NSMutableArray * child;
+@property (unsafe_unretained) id<VariableDelegate> delegate;
+@property (unsafe_unretained) NSMutableArray * child;
 @property (copy) NSString * name;
 @property (copy) NSString * fullName;
 @property (copy) id value;

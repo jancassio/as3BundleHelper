@@ -11,14 +11,14 @@
 #import "TaskWrapper.h"
 
 @interface FlashLogViewerController : NSWindowController <TaskWrapperController> {
-	IBOutlet NSTextView *field;
+	IBOutlet NSTextView *__unsafe_unretained field;
 	IBOutlet NSButton *autoAlphaButton;
 	IBOutlet AlphaPanel * alphaPanel;
 	
 	TaskWrapper *tailTask;
 }
 
-@property (readonly) NSTextView * field;
+@property (unsafe_unretained, readonly) NSTextView * field;
 
 - (id)init;
 

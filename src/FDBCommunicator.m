@@ -30,6 +30,10 @@
 
 -(id) init
 {
+    self = [super init];
+    
+    if(!self) return nil;
+    
 	commandQueue = [[NSMutableArray alloc] init];
 	truncatedOutput = @"";
 	
@@ -42,7 +46,6 @@
 	//Stops the fdb if it's already running
 	if(fdbTask != nil){
 		[fdbTask stopProcess];
-		[fdbTask release];
 	}
 	
 	//Commands and paths
@@ -126,14 +129,8 @@
 -(void) stop
 {
 	[fdbTask stopProcess];
-	[fdbTask release];
 	fdbTask = nil;
 }
 
--(void) dealloc
-{
-	[commandQueue release];
-	[super dealloc];
-}
 
 @end

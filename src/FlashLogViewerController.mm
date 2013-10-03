@@ -83,8 +83,8 @@
 		NSColor * theColor = [NSUnarchiver unarchiveObjectWithData:colorData];
 		
 		//Getting the string
-		NSMutableAttributedString * text = [[[NSMutableAttributedString alloc]
-											  initWithString: [field string]] autorelease];
+		NSMutableAttributedString * text = [[NSMutableAttributedString alloc]
+											  initWithString: [field string]];
 		//Setting attributes
 		[text addAttribute:NSFontAttributeName value:[field font] range:NSMakeRange(0, [text length])];
 		[text addAttribute:NSForegroundColorAttributeName value:theColor range:NSMakeRange(0, [text length])];
@@ -105,7 +105,6 @@
 	//Start reading
 	tailTask = [[TaskWrapper alloc] initWithController:self arguments:[NSArray arrayWithObjects:@"/usr/bin/tail", @"-f", flashlog, nil]];
 	[tailTask startProcess];
-	[flashlog autorelease];
 }
 
 /* TaskWrapper protocol*/
@@ -181,8 +180,8 @@
 			theColor = (NSColor *)[NSUnarchiver unarchiveObjectWithData:colorData];
 		}
 		
-		NSMutableAttributedString * toAdd = [[[NSMutableAttributedString alloc]
-											  initWithString: line] autorelease];
+		NSMutableAttributedString * toAdd = [[NSMutableAttributedString alloc]
+											  initWithString: line];
 		[toAdd addAttribute:NSFontAttributeName value:[field font] range:NSMakeRange(0, [toAdd length])];
 		[toAdd addAttribute:NSForegroundColorAttributeName value:theColor range:NSMakeRange(0, [toAdd length])];
 		[[field textStorage] appendAttributedString: toAdd];

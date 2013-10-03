@@ -60,7 +60,7 @@
 {
     self = [super init];
     controller = cont;
-    arguments = [args retain];
+    arguments = args;
     
     return self;
 }
@@ -70,9 +70,6 @@
 {
     [self stopProcess];
 
-    [arguments release];
-    [task release];
-    [super dealloc];
 }
 
 // Here's where we actually kick off the process via an NSTask.
@@ -135,7 +132,7 @@
 	
    while ((data = [[[task standardOutput] fileHandleForReading] availableData]) && [data length])
    {
-       [controller appendOutput: [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]];
+       [controller appendOutput: [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
    }
 
    // we tell the controller that we finished, via the callback, and then blow away our connection
@@ -163,7 +160,7 @@
         // Send the data on to the controller; we can't just use +stringWithUTF8String: here
         // because -[data bytes] is not necessarily a properly terminated string.
         // -initWithData:encoding: on the other hand checks -[data length]
-        [controller appendOutput: [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]];
+        [controller appendOutput: [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     } else {
         // We're finished here
         [self stopProcess];

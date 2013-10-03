@@ -34,7 +34,6 @@
 {
 	NSString * value = object;
 	
-	[childCell release];
 
 	//Wich type of control?
 	if ([value isMatchedByRegex:BOOLEAN_TRUE_REGEX] ||
@@ -71,7 +70,6 @@
 		[c setFormatter: numberFormatter];
 		childCell = c;
 		
-		[numberFormatter release];
 		
 	} else if ([value isMatchedByRegex:OBJECT_REGEX]) {
 		
@@ -104,9 +102,4 @@
 }
 */
 
-- (void)dealloc
-{
-	[childCell release];
-	[super dealloc];
-}
 @end

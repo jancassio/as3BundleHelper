@@ -42,10 +42,8 @@
 -(void) setChild:(NSMutableArray *) newChild
 {
 	if (newChild != child) {
-		[child release];
 		
 		child = newChild;
-		[child retain];
 		
 		[delegate askedToReload: self];
 	}
